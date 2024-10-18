@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/stylesheet.css"> <!-- Brug relativ sti -->
+    <link rel="stylesheet" href="../css/taskHandlerStyle.css"> <!-- Brug relativ sti -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Zealand Studiestarts Web App - Parkering</title>
+</head>
+<body>
+<!-- Samme header som på index.html -->
+<div class="home-container active" id="home-container">
+    <div class="header">
+        <a href="../index.html"><img src="../images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo"></a>
+        <p class="navContainerTitle">Moodle Links</p>
+        <div class="navbar">
+            <!-- Samme links som i index.html -->
+            <a class="nav-item" href="https://moodle.zealand.dk/login/" target="_blank">
+                <i class="fa-solid fa-m"></i>
+            </a>
+            <a class="nav-item" href="https://cloud.timeedit.net/zealand/web/timeedit/sso/zealand_sso" target="_blank">
+                <i class="fa-regular fa-calendar-days"></i>
+            </a>
+            <a class="nav-item" href="https://europe.wiseflow.net/login/license/85" target="_blank">
+                <i class="fa-solid fa-w"></i>
+            </a>
+            <a class="nav-item" href="https://studentid.zealand.dk/" target="_blank">
+                <i class="fa-solid fa-id-card"></i>
+            </a>
+            <a class="nav-item" href="fredagsbar.html" target="_blank">
+                <i class="fa-solid fa-champagne-glasses"></i>
+            </a>
+            <a class="nav-item" href="https://office.zealand.dk/" target="_blank">
+                <i class="fa-solid fa-box-open"></i>
+            </a>
+            <a class="nav-item" href="https://moodle.zealand.dk/blocks/praxis_cohort_news/view.php?courseid=1&page=archive" target="_blank">
+                <i class="fa-solid fa-newspaper"></i>
+            </a>
+            <a class="nav-item" href="https://moodle.zealand.dk/user/files.php" target="_blank">
+                <i class="fa-solid fa-print"></i>
+            </a>
+            <a class="nav-item" href="https://moodle.zealand.dk/user/preferences.php" target="_blank">
+                <i class="fas fa-user"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Indholdssektionen, som ændrer sig per side -->
+    <main>
+        <h1>Parkering</h1>
+        <p>Her kan du finde Parkering.</p>
+        <!-- Specifikt indhold for skema siden -->
+    </main>
+
+    <!-- Samme dropup og taskhandler som på index.html -->
+    <div class="dropup">
+        <button class="dropup-btn" id="toggle-form-btn">Vis Opgaver</button>
+    </div>
+    <div class="task-handler" id="task-handler">
+        <div class="task-form" id="task-form">
+            <input type="text" id="task" placeholder="Opgavebeskrivelse..." required>
+            <select id="priority">
+                <option value="top">Høj Prioritet</option>
+                <option value="middle">Mellem Prioritet</option>
+                <option value="low">Lav Prioritet</option>
+            </select>
+            <input type="date" id="deadline" required>
+            <button id="add-task"><i class="fa-solid fa-plus"></i></button>
+        </div>
+        <div class="task-list" id="task-list"></div>
+    </div>
+</div>
+
+<!-- Loading screen, hvis det også skal inkluderes -->
+<div id="loading-screen" style="display: none;">
+    <div class="spinner"></div>
+    <p>Indlæser...</p>
+</div>
+
+<!-- Footer -->
+<footer>
+    <!-- Footer content -->
+</footer>
+
+<!-- Scripts -->
+<script src="../js/taskHandler.js"></script>
+<script src="../js/forsideHandler.js"></script>
+
+</body>
+</html>

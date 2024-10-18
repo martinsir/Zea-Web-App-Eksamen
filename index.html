@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/taskHandlerStyle.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Zealand Studiestarts Web App</title>
+</head>
+<body>
+<!-- Forside -->
+<div class="home-container active" id="home-container">
+
+    <div class="header">
+        <a href="#"><img src="images/logo/ZealandLogoMoodle.png" alt="Zealand" class="logo"></a>
+        <p class="navContainerTitle">Moodle Links</p>
+
+        <!-- Navbar container med swipe-pile og indikator -->
+        <div class="navbar-container">
+            <!-- Venstre pil -->
+            <div class="left-arrow"></div>
+            <div class="navbar">
+                <a class="nav-item" href="https://moodle.zealand.dk/login/" target="_blank">
+                    <i class="fa-solid fa-m"></i>
+                </a>
+                <a class="nav-item" href="https://cloud.timeedit.net/zealand/web/timeedit/sso/zealand_sso?back=https%3A%2F%2Fcloud.timeedit.net%2Fzealand%2Fweb%2F3%2F" target="_blank">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </a>
+                <a class="nav-item" href="https://europe.wiseflow.net/login/license/85" target="_blank">
+                    <i class="fa-solid fa-w"></i>
+                </a>
+                <a class="nav-item" href="https://studentid.zealand.dk/" target="_blank">
+                    <i class="fa-solid fa-id-card"></i>
+                </a>
+                <a class="nav-item" href="pages/fredagsbar.html" target="_blank">
+                    <i class="fa-solid fa-champagne-glasses"></i>
+                </a>
+                <a class="nav-item" href="https://office.zealand.dk/" target="_blank">
+                    <i class="fa-solid fa-box-open"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/blocks/praxis_cohort_news/view.php?courseid=1&page=archive" target="_blank">
+                    <i class="fa-solid fa-newspaper"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/user/files.php" target="_blank">
+                    <i class="fa-solid fa-print"></i>
+                </a>
+                <a class="nav-item" href="https://moodle.zealand.dk/user/preferences.php" target="_blank">
+                    <i class="fas fa-user"></i>
+                </a>
+            </div>
+
+            <!-- Swipe-indikatorer -->
+            <div class="indicators">
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="button-section">
+        <div class="button-item" id="start-quiz">
+            <img src="images/icons/quiz.png" alt="Quiz">
+        </div>
+        <div class="button-item">
+            <a href="pages/skema.html" onclick="console.log('Skema link clicked!')">
+                <img src="images/icons/skema.png" alt="Skema">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/wiseflow.html">
+                <img src="images/icons/wiseflow.png" alt="Wiseflow">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/moodle.html">
+                <img src="images/icons/moodle.png" alt="Moodle">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/minerum.html">
+                <img src="images/icons/rum.png" alt="Mine Rum">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/fredagsbar.html">
+                <img src="images/icons/fredagsbar.png" alt="Fredagsbar">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/kantine.html">
+                <img src="images/icons/kantine.png" alt="Kantine">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/parkering.html">
+                <img src="images/icons/parkering.png" alt="Parkering">
+            </a>
+        </div>
+        <div class="button-item">
+            <a href="pages/nyheder.html">
+                <img src="images/icons/nyheder.png" alt="Nyheder">
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Quiz Container -->
+<div class="quiz-container" id="quiz-container" style="display: none;">
+    <div id="progress-container" style="display: block;">
+        <div id="progress-bar"></div>
+    </div>
+    <h2 id="question">Spørgsmål vises her</h2>
+    <div id="options-container"></div>
+    <div id="feedback" style="display: none;"></div>
+    <div class="button-container">
+        <button id="next-btn" onclick="nextQuestion()">Næste</button>
+        <div id="result"></div>
+        <button id="home-btn" onclick="goToHome()">Tilbage til forsiden</button>
+    </div>
+
+    <!-- Timer sektionen -->
+    <div id="timer">
+        <span id="time-left"></span>
+        <svg class="timer-circle" width="100" height="100">
+            <circle cx="50" cy="50" r="45" stroke="#4caf50" stroke-width="10" fill="transparent" />
+            <text id="time-text" x="50%" y="50%">30</text>
+        </svg>
+        <div id="time-change"></div>
+    </div>
+</div>
+
+<main>
+    <!-- Dropup button to toggle the task handler -->
+    <div class="dropup">
+        <button class="dropup-btn" id="toggle-form-btn">Vis Opgaver</button>
+    </div>
+
+    <!-- Task Handler (Form + List) -->
+    <div class="task-handler" id="task-handler">
+        <div class="task-form" id="task-form">
+            <input type="text" id="task" placeholder="Opgavebeskrivelse..." required>
+            <select id="priority">
+                <option value="top">Høj Prioritet</option>
+                <option value="middle">Mellem Prioritet</option>
+                <option value="low">Lav Prioritet</option>
+            </select>
+            <input type="date" id="deadline" required>
+            <button id="add-task"><i class="fa-solid fa-plus"></i></button>
+        </div>
+
+        <!-- Task List -->
+        <div class="task-list" id="task-list">
+            <!-- Tasks will be dynamically added here -->
+        </div>
+    </div>
+</main>
+
+<!-- Loading screen -->
+<div id="loading-screen" style="display: none;">
+    <div class="spinner"></div>
+    <p>Indlæser quiz...</p>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-section about">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non orci vel orci aliquet venenatis. Aliquam erat volutpat.</p>
+        </div>
+        <div class="footer-section links">
+            <h2>Quick Links</h2>
+            <ul id="footer-container">
+                <li><a href="#">Startside</a></li>
+                <li><a href="#">IT-Hjælp</a></li>
+                <li><a href="#">Vejleder</a></li>
+                <li><a href="#">Sekretær</a></li>
+            </ul>
+        </div>
+        <div class="footer-section contact">
+            <h2>Kontakt os på</h2>
+            <p><i class="fas fa-envelope"></i> email@edu.zealand.dk</p>
+            <p><i class="fas fa-phone"></i> +45 1231 1231</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Zealand Web App | Alle rettigheder forbeholdes.</p>
+    </div>
+</footer>
+
+
+<script src="js/taskHandler.js"></script>
+<script src="js/forsideHandler.js"></script>
+</body>
+</html>

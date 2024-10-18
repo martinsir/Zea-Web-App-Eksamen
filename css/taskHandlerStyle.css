@@ -1,0 +1,183 @@
+/* Container for the button and content */
+.dropup {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 3;
+    text-align: center;
+    pointer-events: none;
+}
+
+/* The button starts at the bottom of the viewport */
+.dropup-btn {
+    z-index: 10;
+    position: relative;
+    background-color: #000000;
+    color: #fff387;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.5s ease-in-out; /* Smooth movement */
+    pointer-events: auto;
+}
+
+.dropup-btn.active {
+    background-color: #3e8e41; /* Change color when active */
+}
+
+/* Task handler section (initially hidden with a max height of 0) */
+.task-handler {
+    position: fixed; /* Fixed at the bottom of the screen */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    background-color: #f9f9f9;
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* When the task handler is visible, expand it */
+.task-handler.visible {
+    max-height: 50vh; /* Use 50% of the viewport height */
+    opacity: 1;
+    padding: 20px;
+    overflow-y: auto; /* Enable scrolling */
+
+    /* Add shadow */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Subtle shadow effect */
+
+    /* Gradient with more transparency at the top */
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.9) 10%, rgba(255, 255, 255, 1) 20%);
+
+    /* Optional rounded corners */
+    border-radius: 10px;
+
+    /* Smooth transition for visual effect */
+    transition: max-height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+
+
+/* Optional: Add some padding for the form and tasks within the task handler */
+.task-form, .task-list {
+    padding: 10px;
+}
+
+
+
+
+/* Make task handler visible when .open class is added */
+.dropup.open .task-handler {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Slide it up smoothly */
+}
+
+/* Task form inside task handler */
+.task-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Form elements in the task form */
+.task-form input,
+.task-form select,
+.task-form button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    flex-grow: 1;
+}
+
+.task-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+/* Task list container */
+.task-list {
+    margin-top: 20px;
+    padding: 10px;
+    border: 5px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+/* Individual task item */
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Task info (task name, priority, deadline) */
+.task-info {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Buttons for marking task done and removing task */
+.task button {
+
+    background-color: #fff387;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-left: 5px; /* Add space between buttons */
+}
+
+.task .remove-task {
+    background-color: #dc3545; /* Red color for remove button */
+}
+
+.task button i {
+    margin-right: 5px; /* Space between icon and text */
+}
+
+.task button[disabled] {
+    background-color: #28a745;
+}
+
+/* Open state for the dropup content and button movement */
+.dropup.open .dropup-content {
+    height: 50vh; /* 50% of the viewport height */
+}
+
+.dropup.open .dropup-btn {
+    transform: translateY(-50vh); /* Move the button along with the content */
+}
+
+/* Extra responsiveness adjustments */
+@media (max-width: 768px) {
+    .task-handler {
+        padding: 1rem;
+    }
+
+    .task-form {
+        flex-direction: column;
+        padding: 1rem;
+    }
+}

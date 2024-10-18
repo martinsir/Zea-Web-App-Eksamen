@@ -1,0 +1,482 @@
+* {
+    box-sizing: border-box;
+}
+
+/* Mobile-first styles (default) */
+html, body {
+    background-color: #fff387;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    min-height: 800px;
+    overflow-x: hidden;
+    height: 100%; /* Make sure the body takes the full height of the viewport */
+    margin: 0; /* Remove default margin */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Container styling */
+.home-container,
+.quiz-container {
+    width: 100%;
+    background-image: linear-gradient(#cccccc, #fff387);
+    padding: 20px;
+    text-align: center;
+    display: none;
+}
+
+.home-container.active,
+.quiz-container.active {
+    display: block;
+}
+
+/* Header with logo and navigation */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 90px;
+    height: auto;
+    margin: 0 10px;
+}
+
+.navContainerTitle {
+    font-size: 10px;
+    color: #999;
+    text-align: center;
+    margin: 5px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+/* Navbar styling */
+.navbar-container {
+    position: relative; /* Tilføjet for at placere pilen i forhold til navbaren */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100vw;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.navbar {
+    display: flex;
+    overflow-x: auto;
+    background-color: #fff387;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.5;
+    white-space: nowrap;
+    scroll-behavior: smooth;
+}
+
+.nav-item {
+    color: #000;
+    margin-right: 10px;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+}
+
+.nav-item i {
+    width: 30px;
+    height: 30px;
+    display: block;
+    align-content: center;
+}
+
+.nav-item:last-child {
+    margin-right: 0;
+}
+
+.nav-item:active i {
+    transform: scale(1.1);
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+}
+
+.nav-item.active i {
+    background-color: #fff387;
+}
+
+.navbar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Pil styling */
+.left-arrow {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    width: 15px;
+    height: 15px;
+    background-image: url('../images/icons/left-arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    transform: translateY(-50%);
+    z-index: 30;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+    animation: blinkArrow 0.8s ease-in-out 3; /* Blink venstre pil */
+}
+
+@keyframes blinkArrow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.navbar-container.hide-left .left-arrow {
+    display: none;
+}
+
+/* Button section styling */
+.button-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    overflow-y: auto;
+    padding: 20px;
+    background-color: #fff387;
+    border-radius: 20px;
+}
+
+.button-item {
+    position: relative;
+    width: calc(50% - 15px);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    background-color: #fff387;
+    pointer-events: auto;
+}
+
+.button-item img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    pointer-events: none;
+}
+
+.button-item img.loaded {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Placeholder styling */
+.button-item::before {
+    
+    border-color: #cccccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.button-item img.loaded::before {
+    display: none;
+}
+
+/* Quiz button styling */
+.button-container {
+    display: block;
+    justify-content: right;
+    gap: 10px;
+}
+
+#next-btn, #home-btn {
+    display: block;
+    background-color: #f4a261;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+#question {
+    font-size: 20px;                
+    font-weight: bold;              
+    color: #264653;                 
+    margin-bottom: 15px;            
+    text-align: center;             
+    background-color: #f4a261;      
+    padding: 15px;                  
+    border-radius: 8px;             
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+    max-width: 100%;                
+    margin-left: auto;              
+    margin-right: auto;             
+}
+
+#options-container button {
+    display: block;
+    width: 100%;
+    background-color: #ccc;
+    color: #000;
+    border: none;
+    padding: 15px;
+    margin: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+/* Feedback styling */
+#feedback {
+    border-radius: 20px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.correct-feedback {
+    background-color: green;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.incorrect-feedback {
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#options-container button.correct {
+    background-color: #2a9d8f; /* Correct answer: green */
+}
+
+#options-container button.incorrect {
+    background-color: #e63946; /* Incorrect answer: red */
+}
+
+/* Timer styling */
+#timer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    position: relative;
+}
+
+.timer-circle {
+    width: 100px;
+    height: 100px;
+    margin-right: 10px;
+    position: relative; /* Make sure the circle is relative to hold the text inside */
+}
+
+.timer-circle circle {
+    stroke: #4caf50;
+    stroke-width: 10;
+    fill: transparent;
+}
+
+#time-text {
+    font-size: 24px;
+    fill: #264653;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    alignment-baseline: middle; /* Ensure vertical alignment */
+    pointer-events: none; /* Prevent interaction */
+}
+
+#time-left {
+    display: block;
+    font-size: 24px;
+    color: #264653;
+}
+
+
+/* Progress bar styling */
+#progress-container {
+    background-color: #ccc;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+#progress-bar {
+    height: 10px;
+    background-color: #2a9d8f;
+    transition: width 0.3s ease;
+}
+
+/* Result section */
+#result {
+    font-size: 24px;
+    color: #264653;
+    margin-top: 20px;
+}
+
+/* Updated quiz container styling */
+.quiz-container {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background-color: #fff387;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#options-container {
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center; /* Center the buttons */
+    width: 100%;
+}
+
+#options-container button {
+    width: 100%;
+    max-width: 400px;
+    margin: 10px 0;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #f4a261;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#options-container button:hover {
+    background-color: #e76f51; /* Change color on hover */
+}
+
+#next-btn {
+    background-color: #264653;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#next-btn:hover {
+    background-color: #2a9d8f;
+}
+
+/* Timer change message styling */
+#time-change {
+    font-size: 18px;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Footer General Styles */
+footer {
+    background-color: #000000;  /* Dark blue background */
+    color: #fff387;
+    padding: 40px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    /*margin-top: 40px;*/
+    padding: 20px 0;
+}
+
+/* Footer Container */
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Footer Sections */
+.footer-section {
+    flex: 1 1 300px;
+    padding: 20px;
+}
+
+.footer-section h2 {
+    font-size: 20px;
+    color: #f4a261;  /* Matching the warm tones */
+    margin-bottom: 15px;
+}
+
+.footer-section p, .footer-section ul, .footer-section li {
+    font-size: 16px;
+    margin: 0 0 10px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s ease;
+}
+
+/* Contact Info */
+.footer-section p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.footer-section i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+    text-align: center;
+    background-color: #cccccc;  /* Green section */
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: #000000;  /* Light yellow text */
+}
+
+.footer-container ul li a {
+    color: #fff387;
+}
+.main-content {
+    flex: 1; /* This pushes the footer to the bottom */
+}
+
